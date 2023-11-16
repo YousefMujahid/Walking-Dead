@@ -29,12 +29,12 @@ public class Movement : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical"); 
         _mouse = Input.GetAxis("Mouse X"); 
-        Motion(horizontal,vertical,_mouse );
+        Motion(horizontal,vertical);
         _Animation(vertical);  
     }
 
     
-    public void Motion(float horizontal, float vertical,float _mouse){
+    public void Motion(float horizontal, float vertical){
 
         
         //Camera.main.
@@ -42,13 +42,12 @@ public class Movement : MonoBehaviour
         rb.MovePosition(transform.position+Move); 
         
         animator.SetBool("Walking", vertical > 0); 
-        transform.Rotate(0, _mouse * turnSpeed * Time.deltaTime ,0);
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround){
+        //transform.Rotate(0, _mouse * turnSpeed * Time.deltaTime ,0);
+        if (Input.GetKeyDown(KeyCode.Space)){
 
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-            isOnGround = false; 
         }
-        isOnGround = true;
+        
         
     }
 

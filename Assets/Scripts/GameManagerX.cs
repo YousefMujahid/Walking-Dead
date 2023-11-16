@@ -8,6 +8,8 @@ public class GameManagerX : MonoBehaviour
     
     public TextMeshProUGUI scoreText;
     [SerializeField] GunM1 gun_script;
+    [SerializeField] GameObject[] zombies; 
+    [SerializeField] Transform _plane; 
     void Start()
     {
         

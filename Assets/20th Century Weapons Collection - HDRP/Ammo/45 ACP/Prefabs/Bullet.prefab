@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 5816544408150625507}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1046a5d5d67a3344fba13b0535763c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombie_script: {fileID: 5024575824035051344, guid: be69322c946851e48a36211ed75e18f6,
+    type: 3}
 --- !u!65 &-2927643331547912661
 BoxCollider:
   m_ObjectHideFlags: 0
