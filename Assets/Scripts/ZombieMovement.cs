@@ -22,6 +22,7 @@ public class ZombieMovement : MonoBehaviour
         Vector3 move = Vector3.forward * moveSpeed * Time.deltaTime; 
         rb.MovePosition(transform.position+move);
        animator.SetBool("isRunning", true);
+       
     }
 
     public void MakeDamge(int num ){
@@ -34,7 +35,15 @@ public class ZombieMovement : MonoBehaviour
     void OnCollisionEnter(Collision collision){
        
          if (collision.gameObject.tag == "bullet"){
+            Debug.Log("Insideee");
             MakeDamge(1); 
+            if ( health == 5){
+                animator.SetBool("isCrawl", true); 
+            }
+            if ( health == 0){
+                animator.SetBool("isDying", true); 
+                Destroy(gameObject, 3);
+            }
         }
     }
    

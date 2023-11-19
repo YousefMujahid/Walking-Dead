@@ -22,9 +22,10 @@ public class GunM1 : MonoBehaviour
     [SerializeField] AudioClip mag_in; 
     [SerializeField] AudioClip mag_out; 
     
-
+    private Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>(); 
     }
 
     // Update is called once per frame
@@ -37,10 +38,9 @@ public class GunM1 : MonoBehaviour
         }
         
         if (Input.GetKeyDown(KeyCode.R) && total_mags > 0 || Input.GetKeyDown(KeyCode.R) && mag == 0 && total_mags > 0){
-            
-
-            Reload();
+            Reload();   
         }
+        animator.SetBool("isReloading", Input.GetKeyDown(KeyCode.R) && total_mags > 0 || Input.GetKeyDown(KeyCode.R) && mag == 0 && total_mags > 0);
 
     }
 
@@ -73,8 +73,17 @@ public class GunM1 : MonoBehaviour
             mag = 30;
             
             total_mags -= 30 - current_mag ;
+            _Play_Sounds(4);
 
-            //another condition preventing reloading.. 
+            
+        }
+    }
+
+    public void Reload_Mag(){
+        Debug.Log("Reload the mag");
+        if (total_mags != 240){
+            total_mags = 240;
+            _Play_Sounds(5);
         }
     }
 
