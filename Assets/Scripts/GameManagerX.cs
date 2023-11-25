@@ -5,15 +5,21 @@ using UnityEngine;
 
 public class GameManagerX : MonoBehaviour
 {
-    
+
+
+    [SerializeField] TextMeshProUGUI kills;
+    [SerializeField] GunM1 gun_script;
+    [SerializeField] GameObject[] zombies;
+    [SerializeField] GameObject[] ammo_box;
+    [SerializeField] Transform _plane;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject _gun;
+    [SerializeField] public int money;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI ammo;
-    [SerializeField] GunM1 gun_script;
-    [SerializeField] GameObject[] zombies; 
-    [SerializeField] Transform _plane; 
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject[] ammo_box; 
-    [SerializeField] GameObject _gun; 
+    public TextMeshProUGUI moneytext;
+    public int kill;
+    private ZombieMovement _zombie_script;
     private bool[] isBox; 
     private bool isNearBy;
     private GunM1 _gun_script; 
@@ -21,6 +27,10 @@ public class GameManagerX : MonoBehaviour
     {
         isBox = new bool[ammo_box.Length];
         _gun_script =_gun.GetComponent<GunM1>(); 
+        for( int i=0; i < zombies.Length; i++){
+            _zombie_script = zombies[i].GetComponent<ZombieMovement>();
+
+        }
     
     }
 
@@ -30,13 +40,17 @@ public class GameManagerX : MonoBehaviour
         
         
         scoreText.text = "Bullets: " + gun_script.mag.ToString()+ "/" + gun_script.total_mags.ToString();  
-        for(int i = 0; i < ammo_box.Length; i++){
+        kills.text = "Kills: " + kill.ToString();
+        moneytext.text = "Money: $"  + money.ToString();
+
+        for (int i = 0; i < ammo_box.Length; i++){
            if (Vector3.Distance(player.transform.position, ammo_box[i].transform.position) < 2)
            {    isBox[i] = true;
 
                 ammo.gameObject.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F)){
                 _gun_script.Reload_Mag(); 
+                
             }
             
             }
@@ -66,6 +80,8 @@ public class GameManagerX : MonoBehaviour
         
        
     }
+
+    
 
 
      

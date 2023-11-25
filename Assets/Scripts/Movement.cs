@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed; 
     [SerializeField] float turnSpeed; 
     [SerializeField] float jumpSpeed;
+    [SerializeField] int health; 
     private Animator animator;
 
     void Start()
@@ -55,6 +56,10 @@ public class Movement : MonoBehaviour
         animator.SetBool("Walking", ver > 0 || ver < 0); 
         animator.SetBool("Running", ver > 0 && Input.GetKey(KeyCode.LeftShift)); 
         
+    }
+
+    public void Player_Health(){
+
     }
 
 

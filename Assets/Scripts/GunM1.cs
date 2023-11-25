@@ -14,6 +14,7 @@ public class GunM1 : MonoBehaviour
     Vector3 pos2;
 
 
+
     [SerializeField] AudioSource audio; 
     
     [SerializeField] AudioClip shooting;
@@ -21,6 +22,7 @@ public class GunM1 : MonoBehaviour
     [SerializeField] AudioClip shells_hitting;
     [SerializeField] AudioClip mag_in; 
     [SerializeField] AudioClip mag_out; 
+    [SerializeField] AudioClip collecting_ammo;
     
     private Animator animator;
     void Start()
@@ -53,7 +55,7 @@ public class GunM1 : MonoBehaviour
             current_mag = mag;
             GameObject bul = Instantiate(_bullet, pos, transform.rotation);
             GameObject cas = Instantiate(_case, pos2, transform.rotation);
-            Destroy(bul, 2);
+            Destroy(bul, 4);
             Destroy(cas, 2); 
         }
         if (Input.GetButton("Fire1") && mag > 0){
@@ -80,14 +82,13 @@ public class GunM1 : MonoBehaviour
     }
 
     public void Reload_Mag(){
-        Debug.Log("Reload the mag");
         if (total_mags != 240){
             total_mags = 240;
             _Play_Sounds(5);
         }
     }
 
-    void _Play_Sounds(int case_number){
+    public void _Play_Sounds(int case_number){
 
         switch(case_number){
 
@@ -112,7 +113,7 @@ public class GunM1 : MonoBehaviour
                 break; 
 
             case 6: 
-                //audio.PlayOneShot(shells_hitting); 
+                audio.PlayOneShot(collecting_ammo); 
                 break; 
 
             case 7: 
