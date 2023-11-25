@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerHealth : MonoBehaviour
+{
+    
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+    void Damage() 
+    {
+    
+    }
+
+    void Healing()
+    {
+        
+    }
+
+    void Increase_Health()
+    {
+
+    }
+
+}

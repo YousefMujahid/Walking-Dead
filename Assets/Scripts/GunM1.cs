@@ -4,27 +4,25 @@ public class GunM1 : MonoBehaviour
 {
     [SerializeField] GameObject _bullet; 
     [SerializeField] GameObject _case; 
-    float _fire_rate = .1f;
-    float timer;
-    float _rand;
     [SerializeField] public int mag = 30;
-    public int current_mag = 0;
     [SerializeField] public int total_mags = 240; 
-    Vector3 pos;
-    Vector3 pos2;
-
-
-
     [SerializeField] AudioSource audio; 
-    
     [SerializeField] AudioClip shooting;
     [SerializeField] AudioClip Gun_Dry;
     [SerializeField] AudioClip shells_hitting;
     [SerializeField] AudioClip mag_in; 
     [SerializeField] AudioClip mag_out; 
     [SerializeField] AudioClip collecting_ammo;
-    
+    [SerializeField] AudioClip purchase;
+    [SerializeReference] AudioClip no_money;
+    public int current_mag = 0;
     private Animator animator;
+    float _fire_rate = .1f;
+    float timer;
+    float _rand;
+    bool isReloading = false;
+    Vector3 pos;
+    Vector3 pos2;
     void Start()
     {
         animator = GetComponent<Animator>(); 
@@ -34,14 +32,16 @@ public class GunM1 : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime; 
-        if (timer > _fire_rate){
+        if (timer > _fire_rate && !isReloading){
             timer = 0;
             Firing();
         }
         
         if (Input.GetKeyDown(KeyCode.R) && total_mags > 0 || Input.GetKeyDown(KeyCode.R) && mag == 0 && total_mags > 0){
-            Reload();   
+            Reload();
+            
         }
+        isReloading = false;
         animator.SetBool("isReloading", Input.GetKeyDown(KeyCode.R) && total_mags > 0 || Input.GetKeyDown(KeyCode.R) && mag == 0 && total_mags > 0);
 
     }
@@ -72,12 +72,10 @@ public class GunM1 : MonoBehaviour
     
     public void Reload(){
         if ( mag >= 0 && mag != 30 &&  total_mags>0 ){
+            isReloading = true;
             mag = 30;
-            
             total_mags -= 30 - current_mag ;
             _Play_Sounds(4);
-
-            
         }
     }
 
@@ -116,10 +114,15 @@ public class GunM1 : MonoBehaviour
                 audio.PlayOneShot(collecting_ammo); 
                 break; 
 
+
             case 7: 
-                //audio.PlayOneShot(shells_hitting); 
+                audio.PlayOneShot(purchase); 
                 break; 
-            
+
+            case 8:
+                audio.PlayOneShot(no_money);
+                break;
+
             default: 
                 break; 
 

@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed; 
     [SerializeField] float turnSpeed; 
     [SerializeField] float jumpSpeed;
-    [SerializeField] int health; 
+    [SerializeField] public int player_health; 
     private Animator animator;
 
     void Start()
@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour
 
         
         //Camera.main.
-        var Move = Quaternion.Euler(0, transform.localEulerAngles.y, 0) * new Vector3(horizontal, -0.1f, vertical) * (vertical > 0 && Input.GetKey(KeyCode.LeftShift) ? fastSpeed : speed * Time.deltaTime);
+        var Move = Quaternion.Euler(0, transform.localEulerAngles.y, 0) * new Vector3(horizontal, -0.1f, vertical) * (vertical > 0 || vertical < 0 && Input.GetKey(KeyCode.LeftShift) ? fastSpeed : speed * Time.deltaTime);
         rb.MovePosition(transform.position+Move); 
         
         animator.SetBool("Walking", vertical > 0); 
@@ -61,6 +61,10 @@ public class Movement : MonoBehaviour
     public void Player_Health(){
 
     }
+
+   
+
+
 
 
 }

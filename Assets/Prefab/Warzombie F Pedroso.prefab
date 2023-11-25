@@ -2464,7 +2464,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 31ed8b1aced277b479b7e237022e277b, type: 3}
   - {fileID: 8300000, guid: 864843ca447004d4cbaa7e2f02a6e551, type: 3}
   _player: {fileID: 0}
-  gm: {fileID: 6022582564053141573, guid: 8b64e215a75a2984fab106a0b961e719, type: 3}
 --- !u!136 &5688744089227739146
 CapsuleCollider:
   m_ObjectHideFlags: 0

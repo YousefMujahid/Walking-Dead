@@ -11,8 +11,8 @@ public class ZombieMovement : MonoBehaviour
     [SerializeField] AudioSource zombie_audio;
     [SerializeField] AudioClip[] normal_zombie; 
     [SerializeField] AudioClip[] damge_zombie;
-    [SerializeField] GameObject _player;
-    
+    private GameObject _player;
+    private GameObject gm;
     int half_health;
     int nor_zom_arr_index; 
     int dam_zom_arr_index; 
@@ -23,7 +23,8 @@ public class ZombieMovement : MonoBehaviour
     
     void Start()
     {
-        
+        gm = GameObject.Find("GameManager").gameObject;
+
         half_health = health / 2;
         animator = GetComponent<Animator>();
         _player = GameObject.Find("Player").gameObject;
@@ -42,9 +43,11 @@ public class ZombieMovement : MonoBehaviour
          
         
         zombie_navmesh.SetDestination(_player.transform.position);
+        
 
         animator.SetBool("isRunning", true);
-      
+        animator.SetBool("isAttack", Vector3.Distance(_player.transform.position, gameObject.transform.position) < 3f);
+       
     }
 
     public void MakeDamge(int num ){
@@ -53,7 +56,8 @@ public class ZombieMovement : MonoBehaviour
             health = 0; 
         }
     }
-    
+
+
     
     void OnTriggerEnter(Collider other){
             
@@ -71,7 +75,8 @@ public class ZombieMovement : MonoBehaviour
                 {
                     isDie = true;
                     zombie_navmesh.isStopped = true;
-                    animator.SetBool("isDying", true); 
+                    animator.SetBool("isDying", true);
+                    gm.GetComponent<GameManagerX>().kill += 1;
                     Destroy(gameObject, 2);
                     
                      
@@ -79,7 +84,9 @@ public class ZombieMovement : MonoBehaviour
                 
                 
             }
-        }
+         }
+
+       
     }
     
    

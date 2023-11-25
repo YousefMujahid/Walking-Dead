@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform[] points;
     private ZombieMovement _zombie_script;
     Vector3 _position;
-    private int rounds = 1; 
+    private int rounds = 0; 
     private int index;
     int num = 0;
     private int points_index;
@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         _current_number_of_zombies = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        zombie_info.text = "Number of Zombies: " + _current_number_of_zombies.ToString() + "/"+  "Round number: "+ rounds;
+        zombie_info.text = $"Zombies left: {_current_number_of_zombies} Round: {rounds}";
         
         
         
