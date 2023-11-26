@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManagerX : MonoBehaviour
@@ -15,6 +16,7 @@ public class GameManagerX : MonoBehaviour
     [SerializeField] Transform _plane;
     [SerializeField] GameObject player;
     [SerializeField] GameObject _gun;
+    [SerializeField] GameObject _cam;
 
     [SerializeField] GameObject game_over_screen;
     public int money =0;
@@ -30,13 +32,16 @@ public class GameManagerX : MonoBehaviour
     private bool[] isDoor;
     private bool isNearBy;
     private bool isNearByDoor;
-    private GunM1 _gun_script; 
+    private GunM1 _gun_script;
+    private CameraMovement _cam_script;
+ 
     void Start()
     {
         isBox = new bool[ammo_box.Length];
         isDoor = new bool[doors.Length];
-        _gun_script =_gun.GetComponent<GunM1>(); 
-        for( int i=0; i < zombies.Length; i++){
+        _gun_script =_gun.GetComponent<GunM1>();
+        _cam_script = _cam.GetComponent<CameraMovement>();
+        for ( int i=0; i < zombies.Length; i++){
             _zombie_script = zombies[i].GetComponent<ZombieMovement>();
 
         }
@@ -52,15 +57,9 @@ public class GameManagerX : MonoBehaviour
         scoreText.text = "Bullets: " + gun_script.mag.ToString()+ "/" + gun_script.total_mags.ToString();  
         kills.text = "Kills: " + kill.ToString();
         moneytext.text = "Money: $" + money.ToString();
+        GameOver();
 
-        if (player.GetComponent<Movement>().player_health <= 0) 
-        {
-            game_over_screen.SetActive(true);
-            //play sound
-            //disable the script
-            //restart if wish
 
-        }
 
 
     }
@@ -126,6 +125,7 @@ public class GameManagerX : MonoBehaviour
 
                         this.money = money- price;
                         _gun_script._Play_Sounds(7);
+                        
 
                     }
 
@@ -166,10 +166,18 @@ public class GameManagerX : MonoBehaviour
 
         
     }
+    void GameOver()
+    {
+        if (player.GetComponent<PlayerHealth>().current_health <= 0)
+        {
+            game_over_screen.SetActive(true);
+            player.GetComponent<Movement>().enabled = false;
+            player.GetComponent<PlayerHealth>().enabled = false;
+            _gun_script.enabled = false;
+            _cam_script.enabled = false;
+        }
 
-
-
-
-
+    }
 
 }
+

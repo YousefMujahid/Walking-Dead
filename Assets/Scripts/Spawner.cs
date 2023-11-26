@@ -8,9 +8,11 @@ public class Spawner : MonoBehaviour
     [SerializeField] TextMeshProUGUI zombie_info;
     [SerializeField] int number_of_zombies; 
     [SerializeField] Transform[] points;
+    [SerializeField] GameObject player;
+    private PlayerHealth player_health;
     private ZombieMovement _zombie_script;
     Vector3 _position;
-    private int rounds = 0; 
+    public int rounds = 0; 
     private int index;
     int num = 0;
     private int points_index;
@@ -18,8 +20,8 @@ public class Spawner : MonoBehaviour
     private int _current_number_of_zombies;
     void Start()
     {
-        
-        for( int i=0; i < zombies.Length; i++){
+        player_health = player.GetComponent<PlayerHealth>();
+        for ( int i=0; i < zombies.Length; i++){
             _zombie_script = zombies[i].GetComponent<ZombieMovement>();
 
         }
@@ -60,6 +62,8 @@ public class Spawner : MonoBehaviour
             points_index = Random.Range(0, points.Length);
            Instantiate(zombies[index], points[points_index].transform.position, transform.rotation);
         }
+
+        player_health.Increase_Health();
     }
     
 }

@@ -14,6 +14,7 @@ public class GunM1 : MonoBehaviour
     [SerializeField] AudioClip mag_out; 
     [SerializeField] AudioClip collecting_ammo;
     [SerializeField] AudioClip purchase;
+    [SerializeField] AudioClip hurt; 
     [SerializeReference] AudioClip no_money;
     public int current_mag = 0;
     private Animator animator;
@@ -121,6 +122,10 @@ public class GunM1 : MonoBehaviour
 
             case 8:
                 audio.PlayOneShot(no_money);
+                break;
+
+            case 9:
+                audio.PlayOneShot(hurt);
                 break;
 
             default: 
