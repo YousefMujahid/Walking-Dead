@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,7 +24,9 @@ public class GameManagerX : MonoBehaviour
     public int money =0;
     [SerializeField] TextMeshProUGUI door_price_txt;
     [SerializeField] TextMeshProUGUI door_cdnt_buy;
-    private int _door_price = 3000;
+    [SerializeField] TextMeshProUGUI ammo_cdnt_buy;
+    private int _door_price = 30;
+    private int mag_price = 50;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI ammo;
     [SerializeField] TextMeshProUGUI moneytext;
@@ -73,11 +77,18 @@ public class GameManagerX : MonoBehaviour
                 isBox[i] = true;
 
                 ammo.gameObject.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) && this.money < mag_price)
+                {
+                    ammo_cdnt_buy.gameObject.SetActive(true);
+                    _gun_script._Play_Sounds(8);
+                }
+                if (Input.GetKeyDown(KeyCode.F) && this.money >= mag_price)
                 {
                     _gun_script.Reload_Mag();
+                    this.money = money - mag_price;
 
                 }
+                
 
             }
             else
@@ -101,6 +112,7 @@ public class GameManagerX : MonoBehaviour
         if (isNearBy != true)
         {
             ammo.gameObject.SetActive(false);
+            ammo_cdnt_buy.gameObject.SetActive(false);
 
         }
     }
@@ -108,49 +120,55 @@ public class GameManagerX : MonoBehaviour
     {
         for (int i = 0; i < doors.Length ; i++)
         {
-            if (Vector3.Distance(player.transform.position, doors[i].transform.position) < 2)
-            {
-                isDoor[i] = true;
-                door_price_txt.gameObject.SetActive(true);
-                if (money > 0)
+            //if (doors[i] != null)
+            //{
+                if (Vector3.Distance(player.transform.position, doors[i].transform.position) < 2)
                 {
-                    if (Input.GetKeyDown(KeyCode.F) && money < price)
+                    isDoor[i] = true;
+                    door_price_txt.gameObject.SetActive(true);
+                    if (this.money > 0)
                     {
-                        door_cdnt_buy.gameObject.SetActive(true);
-                        _gun_script._Play_Sounds(8);
-                    }
-
-                    if (Input.GetKeyDown(KeyCode.F) && money >= price)            
-                    {
-
-                        this.money = money- price;
-                        _gun_script._Play_Sounds(7);
                         
 
+                        if (Input.GetKeyDown(KeyCode.F) && this.money >= price)
+                        {
+
+                            this.money = money - price;
+                            _gun_script._Play_Sounds(7);
+                            doors[i].transform.position = new Vector3(1000f, 1000f, 1000f);
+                            
+
+                        }
+                        if (Input.GetKeyDown(KeyCode.F) && this.money < price)
+                        {
+                            door_cdnt_buy.gameObject.SetActive(true);
+                            _gun_script._Play_Sounds(8);
+                        }
+
+
                     }
 
-                   
+
                 }
-
-
-            }
-            else 
+            //}
+            else
             {
                 isDoor[i] = false;
+                
             }
-            
 
-            for (int j=0; j<isDoor.Length ;j++)
-            {
-                if (isDoor[j])
+        }
+        for (int i=0; i<isDoor.Length ;i++)                 //isDoor[i] isNearByDoor
+        {
+                if (isDoor[i])
                 {
-                    isNearByDoor = isDoor[j];
+                    isNearByDoor = isDoor[i];
                     break;
                 }
-                isNearByDoor = isDoor[j];
+                isNearByDoor = isDoor[i];
 
             }
-            if (isNearByDoor != true)
+        if (isNearByDoor != true)
             {
                 door_price_txt.gameObject.SetActive(false);
                 door_cdnt_buy.gameObject.SetActive(false);
@@ -159,12 +177,6 @@ public class GameManagerX : MonoBehaviour
             }
 
 
-
-        }
-
-        
-
-        
     }
     void GameOver()
     {
