@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed; 
     [SerializeField] float turnSpeed; 
     [SerializeField] float jumpSpeed;
-    [SerializeField] public int player_health; 
+    [SerializeField] public int player_health;
     private Animator animator;
 
     void Start()
@@ -58,11 +58,9 @@ public class Movement : MonoBehaviour
         
     }
 
-    public void Player_Health(){
-
-    }
-
    
+
+
 
 
 

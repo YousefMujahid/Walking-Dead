@@ -19,8 +19,10 @@ public class GameManagerX : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject _gun;
     [SerializeField] GameObject _cam;
-
     [SerializeField] GameObject game_over_screen;
+    [SerializeField] GameObject holy_block;
+    
+
     public int money =0;
     [SerializeField] TextMeshProUGUI door_price_txt;
     [SerializeField] TextMeshProUGUI door_cdnt_buy;
@@ -38,6 +40,7 @@ public class GameManagerX : MonoBehaviour
     private bool isNearByDoor;
     private GunM1 _gun_script;
     private CameraMovement _cam_script;
+
  
     void Start()
     {
@@ -62,7 +65,6 @@ public class GameManagerX : MonoBehaviour
         kills.text = "Kills: " + kill.ToString();
         moneytext.text = "Money: $" + money.ToString();
         GameOver();
-
 
 
 
@@ -120,8 +122,8 @@ public class GameManagerX : MonoBehaviour
     {
         for (int i = 0; i < doors.Length ; i++)
         {
-            //if (doors[i] != null)
-            //{
+         
+          
                 if (Vector3.Distance(player.transform.position, doors[i].transform.position) < 2)
                 {
                     isDoor[i] = true;
@@ -158,7 +160,7 @@ public class GameManagerX : MonoBehaviour
             }
 
         }
-        for (int i=0; i<isDoor.Length ;i++)                 //isDoor[i] isNearByDoor
+        for (int i=0; i<isDoor.Length ;i++)                
         {
                 if (isDoor[i])
                 {
@@ -190,6 +192,7 @@ public class GameManagerX : MonoBehaviour
         }
 
     }
+    
 
 }
 
