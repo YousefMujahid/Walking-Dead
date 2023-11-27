@@ -17,14 +17,15 @@ public class GunM1 : MonoBehaviour
     [SerializeField] AudioClip hurt;
     [SerializeField] AudioClip holy_music;
     [SerializeReference] AudioClip no_money;
+    Vector3 pos;
+    Vector3 pos2;
     public int current_mag = 0;
     private Animator animator;
     float _fire_rate = .1f;
     float timer;
     float _rand;
     bool isReloading = false;
-    Vector3 pos;
-    Vector3 pos2;
+   
     void Start()
     {
         animator = GetComponent<Animator>(); 

@@ -9,9 +9,9 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] float sensX;
     [SerializeField] float sensY; 
     [SerializeField] Transform orientation;
+    [SerializeField] int degree;
     private float xRotation;
     private float yRotation;
-    [SerializeField] int degree;
 
     void Start()
     {

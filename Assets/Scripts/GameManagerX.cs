@@ -21,25 +21,23 @@ public class GameManagerX : MonoBehaviour
     [SerializeField] GameObject _cam;
     [SerializeField] GameObject game_over_screen;
     [SerializeField] GameObject holy_block;
-    
-
-    public int money =0;
     [SerializeField] TextMeshProUGUI door_price_txt;
     [SerializeField] TextMeshProUGUI door_cdnt_buy;
     [SerializeField] TextMeshProUGUI ammo_cdnt_buy;
-    private int _door_price = 30;
-    private int mag_price = 50;
+    [SerializeField] TextMeshProUGUI moneytext;
+    private CameraMovement _cam_script;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI ammo;
-    [SerializeField] TextMeshProUGUI moneytext;
+    public int money =0;
     public int kill = 0;
     private ZombieMovement _zombie_script;
+    private int _door_price = 3000;
+    private int mag_price = 500;
     private bool[] isBox;
     private bool[] isDoor;
     private bool isNearBy;
     private bool isNearByDoor;
     private GunM1 _gun_script;
-    private CameraMovement _cam_script;
 
  
     void Start()
@@ -187,6 +185,8 @@ public class GameManagerX : MonoBehaviour
             game_over_screen.SetActive(true);
             player.GetComponent<Movement>().enabled = false;
             player.GetComponent<PlayerHealth>().enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             _gun_script.enabled = false;
             _cam_script.enabled = false;
         }

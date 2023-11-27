@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
     public int current_health;
     private int death_point = 0;
     private int damge_count;
-    private int health_price = 100;
+    private int health_price = 1000;
 
 
 

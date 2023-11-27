@@ -11,15 +11,15 @@ public class ZombieMovement : MonoBehaviour
     [SerializeField] AudioSource zombie_audio;
     [SerializeField] AudioClip[] normal_zombie; 
     [SerializeField] AudioClip[] damge_zombie;
+    Animator animator;
+    NavMeshAgent zombie_navmesh;
     private GameObject _player;
     private GameObject gm;
     int half_health;
     int nor_zom_arr_index; 
     int dam_zom_arr_index; 
     bool isDying = false;
-    Animator animator;
     bool isDie;
-    NavMeshAgent zombie_navmesh;
     
     void Start()
     {

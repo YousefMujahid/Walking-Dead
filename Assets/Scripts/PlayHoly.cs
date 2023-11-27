@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayHoly : MonoBehaviour
 {
@@ -19,6 +21,13 @@ public class PlayHoly : MonoBehaviour
         {
             gunM1._Play_Sounds(10);
         }
+    }
+
+    public void Restart_Button()
+    {
+        SceneManager.LoadScene("Menu");
+
+
     }
 
 

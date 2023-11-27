@@ -5,9 +5,9 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
    
-    float _ongoing_speed = 25.0f;
     public ZombieMovement zombie_script;
     private GameObject gm;
+    float _ongoing_speed = 25.0f;
 
     void Start()
     {

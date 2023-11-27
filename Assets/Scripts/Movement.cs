@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField] float fastSpeed;
+    [SerializeField] float speed;
+    [SerializeField] float turnSpeed;
+    [SerializeField] float jumpSpeed;
+    [SerializeField] public int player_health;
     Rigidbody rb;
+    private Animator animator;
     float horizontal; 
     float vertical;
     float _mouse;
     float _mouseY;
     bool isOnGround = true;
-    [SerializeField] float fastSpeed; 
-    [SerializeField] float speed; 
-    [SerializeField] float turnSpeed; 
-    [SerializeField] float jumpSpeed;
-    [SerializeField] public int player_health;
-    private Animator animator;
+    
 
     void Start()
     {

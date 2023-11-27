@@ -26,9 +26,7 @@ public class Spawner : MonoBehaviour
 
         }
         
-        /*for (int i = 0; i <  number_of_zombies; i++){
-            Instantiate(zombies[index], points[points_index]);
-        }*/
+        
         
     }
 
